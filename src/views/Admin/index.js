@@ -17,9 +17,40 @@ const mainPanel = createRef();
 
 function Admin (props){
   const usersTableColumns = [
-    { title: 'ID', field: 'id_producto', editable: 'never' },
+    { title: 'Cedula', field: 'cedula', editable: 'never' },
+    { title: 'Tipo', field: 'tipo' },
+    { title: 'Nombre', field: 'nombre' },
+    { title: 'Apellido', field: 'apellido' },
+    { title: 'Email', field: 'email' },
+    { title: 'Clave', field: 'clave' },
+    { title: 'Telefono', field: 'telefono' },
+    { title: 'Carrera', field: 'carrera' },
+    { title: 'Materias', field: 'materias' },
+  ]
+  const subjectsTableColumns = [
+    { title: 'NRC', field: 'nrc', editable: 'never' },
+    { title: 'Nro Interacciones', field: 'n_niteracciones' },
+    { title: 'Profesor', field: 'profesor' },
+    { title: 'Delegado', field: 'delegado' },
+    { title: 'Nro Inscritos', field: 'n_inscritos' },
+  ]
+  const interactionsTableColumns = [
+    { title: 'ID', field: 'id', editable: 'never' },
+    { title: 'NRC', field: 'nrc' },
+    { title: 'Materia', field: 'materia' },
+    { title: 'Profesor', field: 'profesor' },
+    { title: 'Delegado', field: 'delegado' },
+    { title: 'Hora Inicio', field: 'hora_inicio' },
+    { title: 'Hora Fin', field: 'hora_fin' },
+    { title: 'Asistencia', field: 'asistencia' },
+    { title: 'Observaciones Profesor', field: 'observaciones_P' },
+    { title: 'Observaciones Delegado', field: 'observaciones_D' },
+    { title: 'Nivel de Incidencia', field: 'nivel_incidencia' },
+    { title: 'Descripcion', field: 'descripcion_incidencia' },
   ]
   const users = []
+  const subjects = []
+  const interactions = []
 
   return (
     <div className='px-0 mx-auto admin-wrapper'>
@@ -43,7 +74,7 @@ function Admin (props){
                     <CardBody>
                       {/* Users Table */}
                       <Row className='mx-0 justify-content-center mb-3'>
-                        <div style={{ maxWidth: '100%' }}>
+                        <div style={{ maxWidth: '100%', width: '100%' }}>
                           <MaterialTable
                             title="Usuarios"
                             columns={usersTableColumns}
@@ -52,24 +83,24 @@ function Admin (props){
                           />
                         </div>
                       </Row>
-                      {/* Products Table */}
+                      {/* Subjects Table */}
                       <Row className='mx-0 justify-content-center mb-3'>
-                        <div style={{ maxWidth: '100%' }}>
+                        <div style={{ maxWidth: '100%', width: '100%' }}>
                           <MaterialTable
                             title="Materias"
-                            columns={usersTableColumns}
-                            data={users}
+                            columns={subjectsTableColumns}
+                            data={subjects}
                             icons={TableIcons}
                           />
                         </div>
                       </Row>
-                      {/* Products Table */}
+                      {/* Interactions Table */}
                       <Row className='mx-0 justify-content-center mb-3'>
-                        <div style={{ maxWidth: '100%' }}>
+                        <div style={{ maxWidth: '100%', width: '100%' }}>
                           <MaterialTable
                             title="Interacciones"
-                            columns={usersTableColumns}
-                            data={users}
+                            columns={interactionsTableColumns}
+                            data={interactions}
                             icons={TableIcons}
                           />
                         </div>
