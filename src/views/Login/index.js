@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom';
 import logo  from '../../assets/logo.png';
 import { history } from '../../helpers'
 import '../../index.css';
+import './styles.css';
 
 const mainPanel = createRef();
 
@@ -36,7 +37,7 @@ function Login(props) {
               <Row className='mb-3' />
               {/* Card */}
               <Row className='mx-0 justify-content-center'>
-                <Card className='w-50'>
+                <Card className='w-50 login-card shadow'>
                   <CardBody>
                     <Row className='mx-0 justify-content-center mb-2'>
                       <Label className='h3'>
@@ -77,7 +78,7 @@ function Login(props) {
                       />
                     </FormGroup>
                     <Row className='mx-0 justify-content-end'>
-                      <Button onClick={() => setGoto('/delegados')}>
+                      <Button style={{ backgroundColor: '#eabe41', borderColor: '#eabe41' }} onClick={() => setGoto('/delegados')}>
                         Aceptar
                       </Button>
                     </Row>

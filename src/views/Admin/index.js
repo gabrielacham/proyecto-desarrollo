@@ -1,12 +1,11 @@
-import React, { createRef } from "react"
+import React, { createRef, useState } from "react"
 import {
   Row,
   Col,
   Label,
-  Navbar,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import logo  from '../../assets/logo.png';
+import Navbar from '../../components/Navbar';
 import '../../index.css';
 
 const mainPanel = createRef();
@@ -19,9 +18,7 @@ const mainPanel = createRef();
           <div className='admin-container'>
               <Col>
                 <div>
-                  <Navbar color="faded" light>
-                    <img src={logo} style={{width: '4.3rem'}} alt=''/>
-                  </Navbar>
+                  <Navbar admin />
                 </div>
                 <Row>
                   <Label className='h1'>
