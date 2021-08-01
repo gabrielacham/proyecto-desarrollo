@@ -78,7 +78,7 @@ function Login(props) {
                       />
                     </FormGroup>
                     <Row className='mx-0 justify-content-end'>
-                      <Button style={{ backgroundColor: '#eabe41', borderColor: '#eabe41' }} onClick={() => setGoto('/delegados')}>
+                      <Button style={{ backgroundColor: '#eabe41', borderColor: '#eabe41' }} onClick={() => history.push('/admin')}>
                         Aceptar
                       </Button>
                     </Row>

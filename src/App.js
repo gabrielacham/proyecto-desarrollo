@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect, Router } from "react-router-dom";
 import Login from './views/Login';
 import Admin from './views/Admin';
+import Estadisticas from './views/Estadisticas';
 import Docentes from './views/Docentes';
 import Delegados from './views/Delegados';
 // import NotFound from './views/NotFound';
@@ -14,12 +15,17 @@ class App extends React.Component {
 
   render(){
     return(
-      <Router history={history}>
+      <Router history={history} forceRefresh={true}>
         <div>
           <Switch>
             <Route
               path="/admin"
               component={Admin}
+              exact
+            />
+            <Route
+              path="/estadisticas"
+              component={Estadisticas}
               exact
             />
             <Route

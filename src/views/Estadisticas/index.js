@@ -10,7 +10,7 @@ import '../../index.css';
 
 const mainPanel = createRef();
 
- function Delegados (props){
+ function Estadisticas (props){
   return (
     <div className='px-0 mx-auto admin-wrapper'>
       <div className='admin-main-panel' ref={mainPanel}>
@@ -22,7 +22,7 @@ const mainPanel = createRef();
                 </div>
                 <Row>
                   <Label className='h1'>
-                    Delegados
+                    Estadisticas
                   </Label>
                 </Row>
               </Col>
@@ -33,4 +33,4 @@ const mainPanel = createRef();
   )
 }
 
-export default withRouter(Delegados);
+export default withRouter(Estadisticas);
