@@ -81,6 +81,7 @@ function Docentes (props){
                     <Col className='p-0'>
                     <FormGroup>
                       <Input
+                        style={{ height: '3.2rem' }}
                         className='shadow'
                         type="select"
                         name="materias"
