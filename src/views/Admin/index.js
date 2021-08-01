@@ -74,7 +74,7 @@ function Admin (props){
                     <CardBody>
                       {/* Users Table */}
                       <Row className='mx-0 justify-content-center mb-3'>
-                        <div style={{ maxWidth: '100%', width: '100%' }}>
+                        <div className='shadow' style={{ maxWidth: '100%', width: '100%' }}>
                           <MaterialTable
                             title="Usuarios"
                             columns={usersTableColumns}
@@ -85,7 +85,7 @@ function Admin (props){
                       </Row>
                       {/* Subjects Table */}
                       <Row className='mx-0 justify-content-center mb-3'>
-                        <div style={{ maxWidth: '100%', width: '100%' }}>
+                        <div className='shadow' style={{ maxWidth: '100%', width: '100%' }}>
                           <MaterialTable
                             title="Materias"
                             columns={subjectsTableColumns}

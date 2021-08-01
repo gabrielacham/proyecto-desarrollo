@@ -25,7 +25,6 @@ function Login(props) {
     console.log('gt',  goto);
     console.log(cedula);
     console.log(password);
-    history.push('/admin')
   }
 
   return (
@@ -78,7 +77,7 @@ function Login(props) {
                       />
                     </FormGroup>
                     <Row className='mx-0 justify-content-end'>
-                      <Button style={{ backgroundColor: '#eabe41', borderColor: '#eabe41' }} onClick={() => history.push('/admin')}>
+                      <Button style={{ backgroundColor: '#eabe41', borderColor: '#eabe41' }} onClick={() => history.push('/docentes')}>
                         Aceptar
                       </Button>
                     </Row>
