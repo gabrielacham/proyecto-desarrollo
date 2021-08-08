@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react"
+import React, { createRef, useState, useEffect } from "react"
 import {
   Row,
   Col,
@@ -11,11 +11,15 @@ import { withRouter } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import TableIcons  from '../../components/TableIcons';
 import Navbar from '../../components/Navbar';
+import axios from 'axios';
 import '../../index.css';
 
 const mainPanel = createRef();
 
 function Admin (props){
+  const [usersData, setUsersData] = useState([]);
+  const [isLoggedin, setLogged] = useState(true);
+
   const usersTableColumns = [
     { title: 'Cedula', field: 'cedula', editable: 'never' },
     { title: 'Tipo', field: 'tipo' },
@@ -51,6 +55,36 @@ function Admin (props){
   const users = []
   const subjects = []
   const interactions = []
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await axios.get('http://localhost:3001/careers')
+      console.log(userData);
+      const newUser = {
+        cedula: 25083768,
+        idCarrera: 1,
+        isAdmin: true,
+        rol: 'Admin',
+        nombre: 'Gabriela',
+        apellido: 'Albornoz',
+        email: 'g1@gmail.com',
+        clave: '1234',
+        telefono: '1234',
+      }
+      // const newCarrera = {
+      //   nombre_carrera: 'Matematicas'
+      // }
+      // axios
+      //   .post('http://localhost:3001/careers', newCarrera)
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err));
+    }
+
+    if (isLoggedin) {
+      fetchData()
+    }
+}, [isLoggedin]);
+
 
   return (
     <div className='px-0 mx-auto admin-wrapper'>

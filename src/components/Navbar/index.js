@@ -33,8 +33,6 @@ function Header(props) {
     }
   }, [history]);
 
-  console.log(props.history)
-
   return (
     <div>
       <Navbar color="faded" light>
