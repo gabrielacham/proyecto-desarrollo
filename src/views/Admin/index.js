@@ -2,12 +2,12 @@ import React, { createRef, useState, useEffect } from "react"
 import {
   Row,
   Col,
-  Label,
   Button,
   Card,
   CardBody,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { alpha } from '@material-ui/core/styles';
 import MaterialTable from 'material-table';
 import TableIcons  from '../../components/TableIcons';
 import Navbar from '../../components/Navbar';
@@ -17,19 +17,20 @@ import '../../index.css';
 const mainPanel = createRef();
 
 function Admin (props){
-  const [usersData, setUsersData] = useState([]);
+  const [users, setUsersData] = useState([]);
+  const [subjects, setSubjectsData] = useState([]);
+  const [interactions, setInteractionsData] = useState([]);
   const [isLoggedin, setLogged] = useState(true);
 
   const usersTableColumns = [
-    { title: 'Cedula', field: 'cedula', editable: 'never' },
-    { title: 'Tipo', field: 'tipo' },
+    { title: 'Cedula', field: 'cedula' },
+    { title: 'Tipo', field: 'rol' },
     { title: 'Nombre', field: 'nombre' },
     { title: 'Apellido', field: 'apellido' },
     { title: 'Email', field: 'email' },
     { title: 'Clave', field: 'clave' },
     { title: 'Telefono', field: 'telefono' },
-    { title: 'Carrera', field: 'carrera' },
-    { title: 'Materias', field: 'materias' },
+    { title: 'Carrera', field: 'id_carrera' },
   ]
   const subjectsTableColumns = [
     { title: 'NRC', field: 'nrc', editable: 'never' },
@@ -52,38 +53,49 @@ function Admin (props){
     { title: 'Nivel de Incidencia', field: 'nivel_incidencia' },
     { title: 'Descripcion', field: 'descripcion_incidencia' },
   ]
-  const users = []
-  const subjects = []
-  const interactions = []
 
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await axios.get('http://localhost:3001/careers')
+      const userData = await axios.get('http://localhost:3001/users')
+      const interactionsData = await axios.get('http://localhost:3001/interactions')
+      const subjectsData = await axios.get('http://localhost:3001/class')
       console.log(userData);
-      const newUser = {
-        cedula: 25083768,
-        idCarrera: 1,
-        isAdmin: true,
-        rol: 'Admin',
-        nombre: 'Gabriela',
-        apellido: 'Albornoz',
-        email: 'g1@gmail.com',
-        clave: '1234',
-        telefono: '1234',
+      console.log(interactionsData);
+      console.log(subjectsData);
+      setUsersData(userData.data)
+      setSubjectsData(subjectsData.data)
+      setInteractionsData(interactionsData.data)
+      const newSubject = {
+        nrc: 25083,
+        idCarrera: 4,
+        numInscritos: 20,
+        numInteracciones: 2,
+        cedulaProfesor: 25083768,
+        cedulaDelegado: 25083575,
       }
-      // const newCarrera = {
-      //   nombre_carrera: 'Matematicas'
-      // }
-      // axios
-      //   .post('http://localhost:3001/careers', newCarrera)
-      //   .then(res => console.log(res))
-      //   .catch(err => console.log(err));
+      axios
+        .post('http://localhost:3001/class', newSubject)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
 
     if (isLoggedin) {
       fetchData()
     }
 }, [isLoggedin]);
+
+function createUser(newData) {
+  axios
+    .put('http://localhost:3001/users/newData', newData)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+}
+function updateUser(newData) {
+  axios
+    .put(`http://localhost:3001/users/${newData.cedula}/`, newData)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+}
 
 
   return (
@@ -114,6 +126,10 @@ function Admin (props){
                             columns={usersTableColumns}
                             data={users}
                             icons={TableIcons}
+                            editable ={{
+                              onRowAdd: (newData, oldData) => createUser(newData),
+                              onRowUpdate: (newData, oldData) => updateUser(newData),
+                            }}
                           />
                         </div>
                       </Row>

@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react"
+import React, { createRef, useState, useEffect } from "react"
 import {
   Row,
   Col,
@@ -12,11 +12,14 @@ import { withRouter } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import TableIcons  from '../../components/TableIcons';
 import Navbar from '../../components/Navbar';
+import axios from 'axios';
 import '../../index.css';
 
 const mainPanel = createRef();
 
 function Delegados (props){
+  const [isLoggedin, setLogged] = useState(true);
+
   const interactionsTableColumns = [
     { title: 'ID', field: 'id', editable: 'never' },
     { title: 'NRC', field: 'nrc' },
@@ -32,13 +35,34 @@ function Delegados (props){
     { title: 'Descripcion', field: 'descripcion_incidencia' },
   ]
   const interactions = []
-  const subjectsList = [
-    { nombre: 'Matematica Básica' },
-    { nombre: 'Trigonometría' },
-    { nombre: 'Cálculo II' },
-  ]
 
   const [subject, setSubject] = useState('');
+  const [subjectsList, setSubjectList] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const subjects = await axios.get(`http://localhost:3001/users/${25083575}`)
+      const interactionsData = await axios.get(`http://localhost:3001/interactions/delegado/${25083575}`)
+      const subjectsData = await axios.get('http://localhost:3001/class')
+      setSubjectList(subjects.data)
+      const newSubject = {
+        nrc: 25083,
+        idCarrera: 4,
+        numInscritos: 20,
+        numInteracciones: 2,
+        cedulaProfesor: 25083768,
+        cedulaDelegado: 25083575,
+      }
+      axios
+        .post('http://localhost:3001/class', newSubject)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+
+    if (isLoggedin) {
+      fetchData()
+    }
+}, [isLoggedin]);
 
   function renderOptions(data) {
   return (
